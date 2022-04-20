@@ -6,28 +6,44 @@ import lxml
 
 
 #Variables
-site = "https://omni.se/senaste"
+site = "https://www.dn.se/"
+data = ""
 
-#data= {"title": Title}
 
 #Functions
-def check_request(r):
-    if r.status_codes == 200:
-        print(f"The status code is, {requests.status_codes}")
-    else:
-        print(f"Request success, status code is {requests.status_codes}")
+
+def get_text():
+    for data in soup.find_all("p"): 
+        print(data.get_text())
+
+def check_request():
+    try:
+        r = requests.get(site)
+        print(f"Request success, status code is {r.status_code}")
+    except:
+        print(f"Request was unsuccessful, status code is {r.status_code}")
+
+def save_text():
+    with open("data.txt", "w") as f:
+        for data in soup.find_all("p"): 
+            f.write(data.get_text())
+            f.write("\n")
+        print("Data saved!")
+
+
+
 
 
 
 #Main
 if __name__ == "__main__":
+
     soup = BeautifulSoup(requests.get(site).content, "lxml") #Gör en request till site
 
-    print(soup.prettify())
-    #c = soup.select("main")
-    #print(c)
-    c = soup.find_all('a', class_="article-link")[1]
-
+    check_request() #Checks request
+    #get_text()
+    save_text()
+    
     
 
-    print(c)
+    
