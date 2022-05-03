@@ -9,8 +9,7 @@ from datetime import date
 ##Variables
 site = "https://www.dn.se/"
 data = ""
-menu = True # Disable/enable menu 
-text_save_enabled = "Y" # Save preset set with Y/N
+menu = True # Disable/enable menu
 
 
 ##Functions
@@ -26,14 +25,16 @@ def check_request():
     except:
         print(f"Request was unsuccessful, status code is {r.status_code}")
 
-def save_text():
-    if text_save_enabled:
+def save_text(save):
+    if save == "Y":
         with open("data.txt", "w", encoding="utf-8") as f:
             f.write(get_date())
             for data in soup.find_all("p"): 
                 f.write(data.get_text())
                 f.write("\n")
             print("Data saved!")
+    else:
+        pass
 
 def get_date():
     today = str(date.today())
@@ -51,35 +52,38 @@ def option_1():
     else:
         print("Site Saved")
 
-def option_2():
-    text_save_enabled = input("Do you want to enable save text to data.txt? Y/N\n >> ").capitalize
-    if text_save_enabled == "Y":
-        save_text()
-    else:
-        text_save_enabled = str("N")
-        return text_save_enabled == False
-
 def option_3():
     print("Work in progress.")
 
-def options():
-    print(f"""-=Options=-\n
-    [1] Choose website, Currently set to: {site}\n
-    [2] Save to data.txt, Currently set to: {text_save_enabled}\n
-    [3] Send to mail(WIP)\n
-    [4] Launch Program\n
-    [0] Exit Program\n""")
 
-def Menu(menu):
+def Main(menu):
     print("-=Welcome to Content Aggregator=-\n")
+    text_save_enabled = {} #Save placeholder
+
     while menu:
-        options()
+
+        print(f"""-=Options=-\n
+        [1] Choose website, Currently set to: {site}\n
+        [2] Save to data.txt, Currently set to: {text_save_enabled}\n
+        [3] Send to mail(WIP)\n
+        [4] Launch Program\n
+        [0] Exit Program\n""")
+
         choise = int(input("Choose Option: "))
     
         if choise == 1:
             option_1()
         elif choise == 2:
-            option_2()
+            text_save_enabled = str(input("Do you want to enable save text to data.txt? Y/N\n >> ")).capitalize
+            if text_save_enabled == "N":
+
+                for data in soup.find_all("p"): 
+                    print(data.get_text())
+            else:
+
+                text_save_enabled = "Y"
+
+            #choise_is_2 = True
         elif choise == 3:
             option_3()
         elif choise == 4:
@@ -88,20 +92,18 @@ def Menu(menu):
             quit()
         else:
             print("Invalid choise!")
-
-
-
+        
+    check_request() #Checks request
+    save_text(str(text_save_enabled)) #Spara text till data.txt om det är påslaget
 
 
 ##Main
 if __name__ == "__main__":
-    
-    soup = BeautifulSoup(requests.get(site).content, "lxml") #Gör en request till site
-    Menu(menu)
+    while True:
+        soup = BeautifulSoup(requests.get(site).content, "lxml") #Gör en request till site
+        Main(menu)
 
-    check_request() #Checks request
-    
-    save_text() #Sparar text till data.txt
+        
     
 
     
