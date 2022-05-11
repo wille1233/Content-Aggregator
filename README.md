@@ -31,30 +31,32 @@ This project has been tested on Python 3.7+. To install Python you can visit
 ```
 2. Install Requests
 ```cmd
-pip install Requests
+    pip install Requests
 ```
 3. Install bs4
 ```cmd
-pip install bs4
+    pip install bs4
 ```
 4. Install lxml
 ```cmd
-pip install lxml
+    pip install lxml
 ```
 5. Install datetime
 ```cmd
-pip install datetime
+    pip install datetime
 ```
 6. Install smtplib
 ```cmd
-pip install smtplib
+    pip install smtplib
 ```
 7. Install email.message
 ```cmd
-pip install email.message
+    pip install email.message
 ```
 7. Add mail account information to Main.py(Optional)
+```
     line 45-46
+```
 
 ## Code conventions
 
