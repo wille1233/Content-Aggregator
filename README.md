@@ -60,7 +60,7 @@ This project has been tested on Python 3.7+. To install Python you can visit
 
 ## Code conventions
 
-# Standrads:
+### Standrads:
 - PEP8
 - Docstrings
 
