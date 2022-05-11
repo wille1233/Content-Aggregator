@@ -138,7 +138,6 @@ Vid större förändringar önskar jag att en issue öppnas för diskussion om v
 
 ## Contact
 
-***Skriv här hur du blir kontaktad ifall det finns frågor om projektet***
 
 William Eriksson - officiellawilliam@gmail.com
 
